@@ -1,4 +1,3 @@
-# codex-mcp-db-docker
 # Codex + MCP + Docker + MySQL をローカルで動かした
 
 ## 概要
