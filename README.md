@@ -1,7 +1,7 @@
 # Codexから自然言語でMySQLを操作する
 
 ## 概要
-WSL上のUbuntuでDockerとMySQLを起動し、MCPサーバーを構築、Windows11上のCodexから自然言語でDB操作を行った。
+WSL上のUbuntuでDocker、MySQLを起動し、MCPサーバーを構築、Windows11上のCodexから自然言語でDB操作を行う。
 
 ## 構成
 Codex → MCP Server → MySQL(Docker)
