@@ -301,10 +301,10 @@ await server.connect(transport);
 
 ### MCP Serverの実行
 ```bash
-node mysql-mcp.mjs
+node mysql-mcp.js
 ```
 
-### Codexの設定
+## Codexの設定
 
 ### 左下「設定」をクリックしポップアップの「設定」をクリック
 <img width="1315" height="948" alt="image" src="https://github.com/user-attachments/assets/7e5559cb-ad44-4c85-837d-7cf72dff7b63" />
