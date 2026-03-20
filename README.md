@@ -315,6 +315,8 @@ node mysql-mcp.js
 ### 名前、起動用コマンド、引数を入力し「保存する」をクリック
 <img width="1315" height="959" alt="image" src="https://github.com/user-attachments/assets/a574c829-94e6-4d73-ab86-78ab6fcf772b" />
 
+## 自然言語でのMySQL操作
+
 ### スレッドを作成し入力欄に自然言語で指示を入力
 <img width="1315" height="959" alt="image" src="https://github.com/user-attachments/assets/1bd62f77-eb89-4c9a-bd5e-d2053b7810b8" />
 
