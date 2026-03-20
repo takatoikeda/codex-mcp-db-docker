@@ -17,29 +17,40 @@ Codex → MCP Server → MySQL(Docker)
 ### Dockerのインストール
 
 ### 必要なパッケージの追加
+```bash
 sudo apt install -y ca-certificates curl gnupg
+```
 
 ### GPGキー追加
+```bash
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
 sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+```
 
 ### リポジトリ追加
+```bash
 echo \
 "deb [arch=$(dpkg --print-architecture) \
 signed-by=/etc/apt/keyrings/docker.gpg] \
 https://download.docker.com/linux/ubuntu \
 $(. /etc/os-release && echo $VERSION_CODENAME) stable" | \
 sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
 
 ### インストール
+```bash
 sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io
+```
 
 ### ユーザー権限でDockerを起動させるため以下設定を実施
+```bash
 sudo usermod -aG docker $USER
+```
 
 ### MySQLをDockerで起動
+```bash
 docker run -d \
   --name mysql-test \
   -e MYSQL_ROOT_PASSWORD=(rootパスワード) \
@@ -62,14 +73,20 @@ d4c7048d1cf1: Pull complete
 Digest: sha256:da906917ca4ace3ba55538b7c2ee97a9bc865ef14a4b6920b021f0249d603f3d
 Status: Downloaded newer image for mysql:8
 0011e079bb87a693e0226e31c5127d6e539aa0b73fa4c845cc2a7fad39f64a88
+```
 
 ### 起動確認
+```bash
 docker logs -f mysql-test
+```
 
 ### 接続テスト
+```bash
 docker exec -it mysql-test mysql -uroot -p
+```
 
 ### WindowsからMySQLに接続
+```bash
 PS C:\Users\user1\Downloads\mysql-9.6.0-winx64\bin> .\mysql.exe -h 127.0.0.1 -uroot -p
 Enter password: ********
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -97,13 +114,17 @@ mysql> show databases;
 | testdb             |
 +--------------------+
 5 rows in set (0.016 sec)
+```
 
 ### Dockerのプロセスを確認
+```bash
 docker ps
 CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                                                    NAMES
 0011e079bb87   mysql:8   "docker-entrypoint.s…"   34 minutes ago   Up 34 minutes   0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp, 33060/tcp   mysql-test
+```
 
 ### MySQLの起動ログを確認
+```bash
 docker logs mysql-test
 2026-03-20 10:18:14+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.4.8-1.el9 started.
 2026-03-20 10:18:14+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
@@ -153,9 +174,10 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
 2026-03-20T10:18:24.298426Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
 2026-03-20T10:18:24.322864Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
 2026-03-20T10:18:24.322981Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.4.8'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
-
+```
 
 ### DockerからMySQLに接続
+```bash
 docker exec -it mysql-test mysql -uroot -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -181,18 +203,26 @@ mysql> show databases;
 | testdb             |
 +--------------------+
 5 rows in set (0.01 sec)
+```
 
 ### node.js、npmをインストール
+```bash
 sudo apt install -y nodejs npm
+```
 
 ### 確認
+```bash
 node -v
 npm -v
+```
 
 ### パッケージインストール
+```bash
 npm install mysql2 @modelcontextprotocol/sdk
+```
 
 ### MCPファイルの作成
+```bash
 vi mysql-mcp.js
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -267,9 +297,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 // 起動
 const transport = new StdioServerTransport();
 await server.connect(transport);
+```
 
 ### MCP Serverの実行
+```bash
 node mysql-mcp.mjs
+```
 
 ### Codexの設定
 
@@ -292,6 +325,7 @@ node mysql-mcp.mjs
 <img width="1315" height="959" alt="image" src="https://github.com/user-attachments/assets/f80d4787-1207-462a-b71e-dfab43ea1111" />
 
 ### MySQLクライアントでデータを確認
+```bash
 PS C:\Users\user1\mysql-9.6.0-winx64\bin> .\mysql.exe -h 127.0.0.1 -uroot -p
 Enter password: ********
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -336,5 +370,6 @@ mysql> select * from users;
 |  2 | yamada |
 +----+--------+
 2 rows in set (0.009 sec)
+```
 
 
